@@ -327,15 +327,20 @@ a { color: inherit; text-decoration: none; }
   margin-right: 6px;
 }
 .topbar-tab {
+  white-space: nowrap;
   border: none;
   background: transparent;
-  padding: 4px 8px;
+  padding: 4px 6px;
   font-size: 12.5px;
   color: var(--text-muted);
   border-bottom: 2px solid transparent;
   font-weight: 500;
 }
 .topbar-tab:hover { color: var(--text); }
+/* narrower desktops: keep the top actions as icons (labels keep their title tooltips) */
+@media (max-width: 1500px) {
+  .topbar-right > .btn:not(#btn-toggle-copilot) > span:not([style]) { display: none; }
+}
 .topbar-tab.active {
   color: var(--text);
   font-weight: 650;
