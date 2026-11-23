@@ -78,16 +78,52 @@ When you research a stock, prices, filings, news and your own judgments usually 
 </table>
 ## Core features
 
-1. **Today overview**: total assets and P&L, upcoming events, market pulse and your watchlist at a glance.
-2. **Discover**: screen symbols with visible rules such as RSI oversold, relative strength and drawdown.
-3. **Workbench**: daily and weekly candlestick charts with EMA overlays, overview, financial statements and news.
-4. **Portfolio**: position weights, HHI concentration, sector cluster exposure and per-position P&L contribution.
-5. **Deep research**: runs capabilities one by one and records each result. Success, partial success and unavailable data are labelled explicitly, missing fields are never invented, and the output includes a stance, a confidence level and bull and bear arguments.
-6. **Investment thesis**: saves research as trackable assumptions and checks each one against the latest market data.
-7. **Compare, alerts, events, skills, evaluation**: side-by-side comparison, price and indicator alerts, a catalyst calendar, skill toggles and evaluation summaries.
-8. **Agent copilot**: asks questions with the current view and symbol as context. It is read-only and has no order-placement capability.
-9. **Details**: command palette (`Ctrl/⌘ + K`), light and dark themes, and a dedicated mobile interface at `/mobile.html`.
+### 1. Today overview
+The first screen you see. It summarises total assets, daily and cumulative P&L and cash weight, lists the biggest movers in your watchlist, and shows upcoming events and the market pulse (S&P 500, Nasdaq 100, Dow Jones and VIX). Clicking any watchlist symbol opens it in the workbench and updates the copilot context to match.
 
+### 2. Discover
+Screening rules organised as a task catalogue. Each rule states its condition in plain terms, for example "RSI(14) < 35 with volume ratio > 1.0x", "drawdown from 60-day high beyond 15%" or "price within 8% of the 52-week high". Rules are grouped into technical structure, relative strength, market moves, fundamental valuation and event-driven, and each one lists the data sources it requires.
+
+### 3. Workbench
+A deep view of a single symbol with three tabs:
+- **Chart**: daily and weekly candlesticks with EMA(6, 12, 20) overlays, OHLC and volume.
+- **Financials**: three financial statements and valuation multiples (P/E, P/B, EV/EBITDA). These depend on the Longbridge CLI or a paid data source. Until one is connected, the page shows the capability as "not ready" instead of leaving a blank.
+- **News**: company news and regulatory filings. This also depends on the Longbridge news capability. When it is not ready, the page explains why and points you to the Events calendar.
+
+### 4. Deep research
+Pick a symbol and a strategy, and the system runs research capability by capability, recording each result as success, partial success or unavailable, together with its source and freshness. The output is a structured conclusion: a stance (bullish, bearish or needs review), a confidence level, bull and bear arguments, catalysts and risks, and how the symbol relates to your current portfolio exposure. You can export it as Markdown or save it as an investment thesis in one step.
+
+### 5. Investment thesis
+Saves research conclusions as trackable assumptions. Each assumption carries a status (intact, pending or broken). The latest market data is checked against every assumption, and a broken one prompts a review. Each re-evaluation records the time, the model used and what changed, so you can see how a judgment evolved.
+
+### 6. Portfolio
+Shows position weights, cost, last price, P&L and sector cluster breakdown. It computes HHI concentration, the top-three share, and combined weights for clusters such as AI semiconductors. Entry points such as "Review concentration and drawdown risk" hand the question straight to the copilot. Positions can be added or removed, which only changes the local demo data.
+
+### 7. Compare
+Places several symbols side by side, by default NVDA, AVGO, MSFT and AAPL, and lets you add or remove them. It compares single-day moves, period returns and a normalised relative-performance curve, which makes strength differences easy to see.
+
+### 8. Alerts
+Conditional alerts on a symbol, including price below or above a level, RSI below a threshold and cluster weight above a limit. Each alert can be switched on or off and carries a note, for example "risk watch level for a 240-share position".
+
+### 9. Events and catalysts
+A dated calendar of earnings, macro releases and product catalysts. Each entry shows its impact on the portfolio (for example "position weight 17.2%") and the points to verify, so you can prepare in advance.
+
+### 10. Skills
+An index of the capabilities the agent can use. Each skill lists its required and optional capabilities and a readiness state (fully ready, partially ready, missing data source or disabled), and can be toggled. Each skill also states its safety boundary, for example that it may only read approved paths and cannot write or execute anything.
+
+### 11. Evaluation
+Benchmark results for the agent: task completion, tool-argument validation, honesty when part of a task fails, source labelling, grounding accuracy against the workspace and portfolio, and research schema integrity. For the same task you can compare how different models performed on latency and token usage.
+
+### 12. Agent copilot
+A persistent panel on the right. Its context follows the current page and symbol and shows the view, the symbol and portfolio position. It offers scenario-based quick prompts, such as reviewing portfolio concentration, checking NVDA's position against its oversold chart, or comparing NVDA with AVGO. You can switch models and reasoning level, and each reply shows the model used and the response time. The copilot is read-only and has no order-placement instructions.
+
+### 13. Productivity and mobile
+- **Command palette**: press `Ctrl/⌘ + K` to jump to a page or a symbol.
+- **Themes**: switch between light and dark with one click.
+- **Mobile interface** (`/mobile.html`): covers the four main entry points, Today, Workbench, Portfolio and Copilot, in a single-column layout designed for phones.
+
+### 14. Profile and security
+Shows the read-only boundary and data-source status: the number of trading capabilities (zero), the market data connector and snapshot time, where state is stored locally, and how missing data is displayed. You can refresh the market snapshot here or open the connection and model settings.
 ## Quick start
 
 **Run locally** (no dependencies, no API key):
@@ -128,12 +164,6 @@ Set your own domain in `routes` inside `wrangler.jsonc`. Alternatively, connect 
 | `.github/workflows/` | PR checks and release workflow |
 | `wrangler.jsonc`, `vercel.json` | Deployment config for Cloudflare Workers and Vercel |
 
-## Tech stack
-
-- Vanilla JavaScript: no framework, no build step, no external CDN
-- CSS variables for light and dark themes
-- Cloudflare Workers (Static Assets) for hosting
-- GitHub Actions for PR checks and releases
 
 ## Data notes
 
