@@ -37,27 +37,45 @@ When you research a stock, prices, filings, news and your own judgments usually 
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-today-light.png" alt="Today overview (light)" /><br /><sub>Today overview · light</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-today-dark.png" alt="Today overview (dark)" /><br /><sub>Today overview · dark</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-today.png" alt="Today overview" /><br /><sub>Today overview</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-discover.png" alt="Discover" /><br /><sub>Discover: screening tasks with visible rules</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-workspace-light.png" alt="Workbench" /><br /><sub>Workbench: charts, financials and news</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-workspace-dark.png" alt="Workbench (dark)" /><br /><sub>Workbench · dark</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-workspace-chart.png" alt="Workbench chart" /><br /><sub>Workbench: candlestick chart with EMA overlays</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-workspace-financials.png" alt="Workbench financials" /><br /><sub>Workbench: financial statements</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-research-light.png" alt="Deep research" /><br /><sub>Deep research: capability log and structured conclusions</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-thesis-light.png" alt="Investment thesis" /><br /><sub>Investment thesis: assumptions checked one by one</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-workspace-news.png" alt="Workbench news" /><br /><sub>Workbench: news</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-portfolio.png" alt="Portfolio" /><br /><sub>Portfolio: concentration and risk diagnostics</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-portfolio-light.png" alt="Portfolio" /><br /><sub>Portfolio: concentration and risk diagnostics</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-discover-light.png" alt="Discover" /><br /><sub>Discover: screening tasks with visible rules</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-compare.png" alt="Compare" /><br /><sub>Multi-symbol comparison</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-alerts.png" alt="Alerts" /><br /><sub>Alerts: price and indicator conditions</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/mobile-today-light.png" alt="Mobile today" width="260" /><br /><sub>Mobile · Today</sub></td>
-    <td align="center"><img src="docs/screenshots/mobile-portfolio-dark.png" alt="Mobile portfolio (dark)" width="260" /><br /><sub>Mobile · Portfolio · dark</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-research.png" alt="Deep research" /><br /><sub>Deep research: capability log and structured conclusions</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-thesis.png" alt="Investment thesis" /><br /><sub>Investment thesis: assumptions checked one by one</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/desktop-skills.png" alt="Skills" /><br /><sub>Skills: on-demand capability index</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-evaluation.png" alt="Evaluation" /><br /><sub>Evaluation: benchmark results</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/desktop-events.png" alt="Events" /><br /><sub>Events and catalyst calendar</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-profile.png" alt="Profile and security" /><br /><sub>Profile and security: read-only status and data sources</sub></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2"><sub><b>Mobile</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/mobile-today.png" alt="Mobile today" width="220" /><br /><sub>Today</sub></td>
+    <td align="center"><img src="docs/screenshots/mobile-workspace.png" alt="Mobile workbench" width="220" /><br /><sub>Workbench</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/mobile-portfolio.png" alt="Mobile portfolio" width="220" /><br /><sub>Portfolio</sub></td>
+    <td align="center"><img src="docs/screenshots/mobile-copilot.png" alt="Mobile copilot" width="220" /><br /><sub>Agent copilot</sub></td>
   </tr>
 </table>
-
 ## Core features
 
 1. **Today overview**: total assets and P&L, upcoming events, market pulse and your watchlist at a glance.

@@ -37,27 +37,45 @@
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-today-light.png" alt="今日总览（浅色）" /><br /><sub>今日总览 · 浅色</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-today-dark.png" alt="今日总览（深色）" /><br /><sub>今日总览 · 深色</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-today.png" alt="今日总览" /><br /><sub>今日总览</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-discover.png" alt="机会发现" /><br /><sub>机会发现：可见规则的筛选任务</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-workspace-light.png" alt="工作台" /><br /><sub>工作台：K 线、财务与新闻</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-workspace-dark.png" alt="工作台（深色）" /><br /><sub>工作台 · 深色</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-workspace-chart.png" alt="工作台 K 线" /><br /><sub>工作台：K 线与 EMA 叠加</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-workspace-financials.png" alt="工作台 财务报表" /><br /><sub>工作台：财务报表</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-research-light.png" alt="深度研究" /><br /><sub>深度研究：能力执行记录与结构化结论</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-thesis-light.png" alt="投资逻辑" /><br /><sub>投资逻辑：假设逐条核对</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-workspace-news.png" alt="工作台 新闻" /><br /><sub>工作台：新闻</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-portfolio.png" alt="投资组合" /><br /><sub>投资组合：集中度与风险诊断</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-portfolio-light.png" alt="投资组合" /><br /><sub>投资组合：集中度与风险诊断</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-discover-light.png" alt="机会发现" /><br /><sub>机会发现：可见规则的筛选任务</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-compare.png" alt="对比" /><br /><sub>多标的对比</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-alerts.png" alt="提醒" /><br /><sub>提醒：价格与指标条件</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/mobile-today-light.png" alt="移动端今日" width="260" /><br /><sub>移动端 · 今日</sub></td>
-    <td align="center"><img src="docs/screenshots/mobile-portfolio-dark.png" alt="移动端组合（深色）" width="260" /><br /><sub>移动端 · 组合 · 深色</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-research.png" alt="深度研究" /><br /><sub>深度研究：能力执行记录与结构化结论</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-thesis.png" alt="投资逻辑" /><br /><sub>投资逻辑：假设逐条核对</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/desktop-skills.png" alt="技能中心" /><br /><sub>技能中心：按需加载的能力索引</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-evaluation.png" alt="评测中心" /><br /><sub>评测中心：基准评测结果</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/desktop-events.png" alt="事件" /><br /><sub>事件与催化剂日历</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-profile.png" alt="个人与安全" /><br /><sub>个人与安全：只读与数据源状态</sub></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2"><sub><b>移动端</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/mobile-today.png" alt="移动端今日" width="220" /><br /><sub>今日</sub></td>
+    <td align="center"><img src="docs/screenshots/mobile-workspace.png" alt="移动端工作台" width="220" /><br /><sub>工作台</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/mobile-portfolio.png" alt="移动端组合" width="220" /><br /><sub>组合</sub></td>
+    <td align="center"><img src="docs/screenshots/mobile-copilot.png" alt="移动端副驾驶" width="220" /><br /><sub>Agent 副驾驶</sub></td>
   </tr>
 </table>
-
 ## 核心功能
 
 1. **今日总览**：组合总资产与盈亏、即将发生的事件、市场脉搏、自选标的一览。

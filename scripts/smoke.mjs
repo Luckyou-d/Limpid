@@ -101,5 +101,16 @@ try {
   pass('vercel.json is valid JSON');
 } catch (err) { fail(`vercel.json is not valid JSON: ${err.message}`); }
 
+// 6. README images must exist (no broken screenshots on the repository page)
+section('6. README image references');
+for (const doc of ['README.md', 'README.en.md']) {
+  const md = readFileSync(join(root, doc), 'utf8');
+  const imgs = [...md.matchAll(/(?:src|href)="((?:docs|\.)[^"]*\.(?:png|svg))"/g)].map((m) => m[1]);
+  for (const img of new Set(imgs)) {
+    if (existsSync(join(root, img))) pass(`${doc} -> ${img}`);
+    else fail(`${doc} references missing image ${img}`);
+  }
+}
+
 console.log(failures === 0 ? '\nAll smoke checks passed.' : `\n${failures} check(s) failed.`);
 process.exit(failures === 0 ? 0 : 1);
