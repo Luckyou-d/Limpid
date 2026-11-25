@@ -2,6 +2,8 @@
 
 (function () {
   const STORAGE_KEY = 'limpidwork_demo_state_v1';
+  // Static site: market data is the built-in snapshot; no live requests are made from the browser.
+  const SNAPSHOT_ONLY = true;
   const V = window.FolioViews;
 
   let market = JSON.parse(JSON.stringify(window.FOLIO_MARKET_SNAPSHOT));
@@ -54,6 +56,10 @@
   }
 
   async function refreshYahooMobile() {
+    if (SNAPSHOT_ONLY) {
+      toast('静态演示站使用内置行情快照，不发起实时请求');
+      return;
+    }
     if (syncingYahoo) return;
     syncingYahoo = true;
     toast('正在连接 Yahoo Finance 同步行情...');

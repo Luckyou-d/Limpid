@@ -1194,6 +1194,7 @@
           <span class="section-eyebrow">Structured Synthesis · 结构化研究</span>
           <h1 class="page-title">深度研究 · ${esc(sym)}</h1>
           <p class="page-sub">${esc(sym)} 的结构化研究 — 事实来自只读能力层，分析由 Agent 合成。</p>
+           <span class="badge warn">${icon('flask', 12)}<span>示例数据 · 预设分析</span></span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <select class="select sm" id="res-sym-select">
@@ -1308,6 +1309,7 @@
           <span class="section-eyebrow">Investment Thesis · 投资逻辑账本</span>
           <h1 class="page-title">投资逻辑 (${state.theses.length})</h1>
           <p class="page-sub">把研究报告保存为可追踪假设的投资逻辑，持续对照最新行情检验原假设是否仍然成立。</p>
+           <span class="badge warn">${icon('flask', 12)}<span>示例数据</span></span>
         </div>
         <button class="btn primary" data-run-scenario="thesis-reeval">${icon('refresh', 13)}<span>重新评估逻辑</span></button>
       </div>
@@ -1409,6 +1411,7 @@
           <span class="section-eyebrow">Deterministic Monitoring · 价格与敞口提醒</span>
           <h1 class="page-title">提醒规则 (${evaluated.length})</h1>
           <p class="page-sub">基于当前 Yahoo Finance 报价与组合权重自动判定触发状态，当前共 <strong>${trigCount}</strong> 条规则已触发。</p>
+           <span class="badge warn">${icon('flask', 12)}<span>示例规则</span></span>
         </div>
         <button class="btn primary" id="btn-add-alert">${icon('plus', 14)}<span>新建价格提醒</span></button>
       </div>
