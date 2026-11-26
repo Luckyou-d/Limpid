@@ -62,7 +62,7 @@
     }
     if (syncingYahoo) return;
     syncingYahoo = true;
-    toast('正在连接 Yahoo Finance 同步行情...');
+    toast('正在连接 Limpid Demo Feed 同步行情...');
     render();
     let count = 0;
     try {
@@ -96,7 +96,7 @@
       toast(`已同步 ${count} 只美股最新延迟行情`);
     } else {
       render();
-      toast('已加载内置 Yahoo Finance 行情快照');
+      toast('已加载内置 Limpid Demo Feed 行情快照');
     }
   }
 
@@ -134,10 +134,10 @@
 
     const fallbackMd = activeEq
       ? `### 移动端只读核验 (${state.activeSymbol})\n\n` +
-        `- **Yahoo 延迟报价**：**$${activeEq.price.toFixed(2)}**（单日 **${V.fmtPct(activeEq.changePct)}**，1M **${V.fmtPct(activeEq.ret1m)}**，RSI **${activeEq.rsi14}**）。\n` +
+        `- **模拟行情报价**：**$${activeEq.price.toFixed(2)}**（单日 **${V.fmtPct(activeEq.changePct)}**，1M **${V.fmtPct(activeEq.ret1m)}**，RSI **${activeEq.rsi14}**）。\n` +
         `- **组合持仓联动**：${pos ? `持有 **${pos.qty} 股** @ $${pos.avgCost.toFixed(2)}，权重 **${pos.weightPct.toFixed(1)}%**，浮盈亏 **${V.fmtSignedUsd(pos.pnl)}**。` : '当前演示组合未持有该标的。'}\n` +
         `- 可点击上方场景胶囊查看完整结构化分析。`
-      : `### 数据源边界 (${state.activeSymbol})\n\nYahoo Finance 仅覆盖美股延迟行情，无法获取 \`${state.activeSymbol}\` 实时报价；明澈 不虚构缺失数据。`;
+      : `### 数据源边界 (${state.activeSymbol})\n\n模拟行情源仅覆盖美股延迟行情，无法获取 \`${state.activeSymbol}\` 实时报价；明澈 不虚构缺失数据。`;
 
     state.copilotTurns.push({
       id: 'turn-' + Date.now(),
@@ -147,7 +147,7 @@
       modelLabel: 'LocalRuntimeAdapter',
       elapsedMs: 12,
       content: fallbackMd,
-      tools: [{ name: 'get_quote', target: state.activeSymbol, status: activeEq ? 'ok' : 'error', ms: 10, source: 'Yahoo Snapshot' }],
+      tools: [{ name: 'get_quote', target: state.activeSymbol, status: activeEq ? 'ok' : 'error', ms: 10, source: '模拟快照' }],
     });
     saveState();
     render();
@@ -219,7 +219,7 @@
 
       <div class="card compact">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <strong class="small">市场脉搏 (Yahoo Delayed)</strong>
+          <strong class="small">市场脉搏 (模拟延迟)</strong>
           <span class="tiny subtle">四大核心指数</span>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
@@ -296,7 +296,7 @@
             <strong style="font-size:16px;">${V.esc(sym)}</strong>
             <span class="badge warn">UNSUPPORTED_CAPABILITY</span>
           </div>
-          <p class="small muted" style="margin:8px 0 12px;">明澈 的 Yahoo Finance 适配器仅提供美股（<code>.US</code>）延迟行情，不支持港股 <code>0700.HK</code>。在未安装 Longbridge CLI 时严格保持 <code>—</code>，不虚构价格。</p>
+          <p class="small muted" style="margin:8px 0 12px;">明澈 的 Limpid Demo Feed 适配器仅提供美股（<code>.US</code>）延迟行情，不支持港股 <code>0700.HK</code>。在未安装 Longbridge CLI 时严格保持 <code>—</code>，不虚构价格。</p>
           <div style="display:flex;gap:8px;">
             <button class="btn sm accent" data-m-run-sc="honest-data-gap">查看缺口说明</button>
             <button class="btn sm" data-m-pick-sym="NVDA.US">切回 NVDA.US</button>
@@ -373,7 +373,7 @@
                  }
                </div>
                <div class="card compact">
-                 <strong class="small">阶段真实回报 (Yahoo)</strong>
+                 <strong class="small">阶段真实回报 (模拟)</strong>
                  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;" class="small tnum">
                    <div><span class="tiny subtle">5D</span><div class="${V.chgClass(eq.ret5d)}" style="font-weight:700;">${V.fmtPct(eq.ret5d)}</div></div>
                    <div><span class="tiny subtle">1M</span><div class="${V.chgClass(eq.ret1m)}" style="font-weight:700;">${V.fmtPct(eq.ret1m)}</div></div>
@@ -702,7 +702,7 @@
       const evaluated = V.evaluateAlerts(state, market, portfolio);
       return `
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span class="small muted">基于 Yahoo 报价自动判定</span>
+          <span class="small muted">基于 模拟 报价自动判定</span>
           <button class="btn xs primary" id="m-open-alert-sheet">${V.icon('plus', 11)}<span>新建提醒</span></button>
         </div>
         ${evaluated
@@ -764,7 +764,7 @@
         <strong class="small">数据源与工作区设置</strong>
         <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div><div class="small" style="font-weight:600;">Yahoo Finance (Delayed)</div><div class="tiny muted">美股报价与日/周 K 线已连接</div></div>
+            <div><div class="small" style="font-weight:600;">Limpid Demo Feed (模拟快照)</div><div class="tiny muted">美股报价与日/周 K 线已连接</div></div>
             <button class="btn xs accent" id="m-sync-yahoo-btn">${V.icon('refresh', 11)}<span>测试连接</span></button>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--border);">
@@ -901,7 +901,7 @@
         </div>
         <div class="m-header-right">
           <button class="btn sm" id="m-open-arch" type="button" title="查看设计架构">${V.icon('fileText', 13)}<span>架构</span></button>
-          <button class="btn sm" id="m-hdr-yahoo" title="同步 Yahoo 行情">${V.icon('refresh', 13)}<span>${syncingYahoo ? '同步..' : 'Yahoo'}</span></button>
+          <button class="btn sm" id="m-hdr-yahoo" title="同步 模拟行情">${V.icon('refresh', 13)}<span>${syncingYahoo ? '同步中..' : '模拟行情'}</span></button>
           <a class="btn sm" href="index.html#${V.esc(route === '/copilot' ? '/today' : route)}">${V.icon('monitor', 13)}<span>桌面版</span></a>
         </div>
       </header>
@@ -909,7 +909,7 @@
       <div class="m-demobar">
         <div style="display:flex;align-items:center;gap:5px;min-width:0;">
           ${V.icon('shield', 12)}
-          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">演示模式 · Yahoo Finance 延迟行情 · 示例持仓 · 只读工作台</span>
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">演示模式 · Limpid Demo Feed 延迟行情 · 示例持仓 · 只读工作台</span>
         </div>
         <span class="mono tiny">${V.esc(state.activeSymbol)}</span>
       </div>
@@ -1030,7 +1030,7 @@
     });
 
     document.querySelectorAll('[data-m-kblock]').forEach((el) => {
-      el.onclick = () => toast(`Yahoo Finance 仅提供 1D/1W 延迟线，${el.dataset.mKblock} 需连接 Longbridge`);
+      el.onclick = () => toast(`Limpid Demo Feed 仅提供 1D/1W 延迟线，${el.dataset.mKblock} 需连接 Longbridge`);
     });
 
     document.getElementById('m-ema-chk')?.addEventListener('change', (e) => {

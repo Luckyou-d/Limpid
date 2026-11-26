@@ -15,7 +15,7 @@
   <a href="#product-preview">Preview</a> ·
   <a href="#core-features">Features</a> ·
   <a href="#quick-start">Quick start</a> ·
-  <a href="#data-notes">Data notes</a> ·
+  <a href="#data-sources-and-boundaries">Data sources</a> ·
   <a href="CHANGELOG.md">Changelog</a>
 </p>
 
@@ -76,6 +76,7 @@ When you research a stock, prices, filings, news and your own judgments usually 
     <td align="center"><img src="docs/screenshots/mobile-copilot.png" alt="Mobile copilot" width="220" /><br /><sub>Agent copilot</sub></td>
   </tr>
 </table>
+
 ## Core features
 
 ### 1. Today overview
@@ -124,6 +125,7 @@ A persistent panel on the right. Its context follows the current page and symbol
 
 ### 14. Profile and security
 Shows the read-only boundary and data-source status: the number of trading capabilities (zero), the market data connector and snapshot time, where state is stored locally, and how missing data is displayed. You can refresh the market snapshot here or open the connection and model settings.
+
 ## Quick start
 
 **Run locally** (no dependencies, no API key):
@@ -164,13 +166,32 @@ Set your own domain in `routes` inside `wrangler.jsonc`. Alternatively, connect 
 | `.github/workflows/` | PR checks and release workflow |
 | `wrangler.jsonc`, `vercel.json` | Deployment config for Cloudflare Workers and Vercel |
 
+## Data sources and boundaries
 
-## Data notes
+Limpid is an **offline demo workbench**: it connects to no live market feed and calls no external model. Prices, candles and research reports are produced by a fixed-seed generator, so the same code yields identical results on any machine. See [data-sources.md](docs/data-sources.md) for the full matrix.
 
-- Market data and charts are a built-in snapshot based on delayed Yahoo Finance data. They are not refreshed in real time.
-- Portfolio, events and research reports are sample data for demonstrating the interface and analysis workflow. They are not investment advice.
-- Copilot replies come from scenario-based preset content. No external language model is called.
-- The project has no trading integration and cannot place orders or move funds.
+| Source | Status | Coverage |
+|---|---|---|
+| Limpid Demo Feed | Enabled | Synthetic prices, daily/weekly candles and company names for 8 US symbols |
+| Longbridge OpenAPI / CLI | Not installed | HK/CN depth, three statements, filings, broker positions |
+| Massive | Not configured | US fallback source |
+| Model runtime | Preset content | Copilot replies and research conclusions are scenario-based preset text |
+
+**When data is missing**:
+
+- Unavailable capabilities state the reason, for example "Longbridge CLI not installed". Nothing is left blank or invented.
+- Financial and valuation fields show `—` instead of estimates or stale values.
+- Pages make no outbound requests on load; "Reload snapshot" only re-reads the built-in data.
+- Portfolio, events, research and alerts carry an "sample data" badge, and samples never pretend to be a connected account.
+
+**Regenerate the demo data**:
+
+```bash
+node scripts/generate-demo-data.mjs   # fixed seed: deterministic market data and narrative
+node scripts/smoke.mjs                # checks syntax, data shapes, and text/snapshot agreement
+```
+
+Every indicator (SMA, EMA, RSI, drawdown, period returns) is computed from the same price series, so charts, tables and prose always agree.
 
 ## Changelog and contributing
 

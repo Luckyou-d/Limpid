@@ -101,8 +101,33 @@ try {
   pass('vercel.json is valid JSON');
 } catch (err) { fail(`vercel.json is not valid JSON: ${err.message}`); }
 
-// 6. README images must exist (no broken screenshots on the repository page)
-section('6. README image references');
+// 6. Narrative consistency: quoted prices/indicators must match the snapshot
+section('6. Narrative vs snapshot consistency');
+let drift = 0;
+for (const [sym, q] of Object.entries(W.FOLIO_MARKET_SNAPSHOT?.equities || {})) {
+  const rep = W.FOLIO_RESEARCH_REPORTS?.[sym]?.parsed;
+  if (!rep) { fail(`no research report for ${sym}`); continue; }
+  const text = [rep.summary, rep.headline, rep.portfolioImpact, ...(rep.bullPoints || []), ...(rep.bearPoints || [])].join(' ');
+  const expected = [Number(q.price).toFixed(2), Number(q.rsi14).toFixed(1), Number(q.sma20).toFixed(2), Number(q.sma50).toFixed(2)];
+  const missing = expected.filter((v) => !text.includes(v));
+  if (missing.length) { drift++; fail(`${sym} report does not quote ${missing.join(', ')}`); }
+}
+if (drift === 0) pass(`research text matches the snapshot for ${Object.keys(W.FOLIO_MARKET_SNAPSHOT?.equities || {}).length} symbols`);
+const initial = typeof W.createInitialFolioState === 'function' ? W.createInitialFolioState() : null;
+if (initial && Array.isArray(initial.holdings)) {
+  const badHolding = initial.holdings.filter((h) => !W.FOLIO_MARKET_SNAPSHOT.equities[h.symbol]);
+  if (badHolding.length === 0) pass('every holding maps to a snapshot symbol');
+  else fail(`holdings with no snapshot quote: ${badHolding.map((h) => h.symbol).join(', ')}`);
+}
+const narrative = JSON.stringify([W.FOLIO_RESEARCH_REPORTS, W.FOLIO_COPILOT_SCENARIOS, W.FOLIO_DEMO_EVENTS, initial]);
+// Identifier names (yahooSourceMode, yahooLastSync, yahooTicker) are expected; only prose counts.
+if (!/(?<![A-Za-z])Yahoo(?![A-Za-z])|helson/i.test(narrative)) pass('narrative contains no old data-source or brand names');
+else fail('narrative still mentions the old data source or brand');
+if (!/(?<![A-Za-z._-])Folio(?![A-Za-z])/.test(narrative)) pass('narrative contains no old project name');
+else fail('narrative still mentions the old project name');
+
+// 7. README images must exist (no broken screenshots on the repository page)
+section('7. README image references');
 for (const doc of ['README.md', 'README.en.md']) {
   const md = readFileSync(join(root, doc), 'utf8');
   const imgs = [...md.matchAll(/(?:src|href)="((?:docs|\.)[^"]*\.(?:png|svg))"/g)].map((m) => m[1]);

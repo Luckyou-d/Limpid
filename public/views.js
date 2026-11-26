@@ -510,7 +510,7 @@
           <p class="page-sub">今天想了解关于你投资组合与自选标的的什么？</p>
         </div>
         <div style="display:flex;gap:8px;align-items:center;">
-          <span class="badge info">行情源: Yahoo Finance · Delayed</span>
+          <span class="badge info">行情源: Limpid Demo Feed · 模拟快照</span>
           <span class="badge warn">${icon('flask', 12)}<span>组合与日历: 示例数据</span></span>
         </div>
       </div>
@@ -613,7 +613,7 @@
 
       <div class="card" style="margin-bottom:14px;">
         <div class="card-header">
-          <span class="section-eyebrow">市场脉搏 (Market Pulse · Yahoo Finance Delayed)</span>
+          <span class="section-eyebrow">市场脉搏 (Market Pulse · Limpid Demo Feed · 模拟快照)</span>
           <span class="tiny subtle">点击任意自选行可同步切换工作台与右侧 Agent 上下文</span>
         </div>
         <div class="grid-4" style="margin-bottom:14px;">
@@ -639,7 +639,7 @@
             <tr>
               <th>自选标的</th>
               <th>赛道标签</th>
-              <th class="right">最新价 (Yahoo)</th>
+              <th class="right">最新价 (模拟)</th>
               <th class="right">单日涨跌</th>
               <th class="right">1个月回报</th>
               <th class="right">RSI(14)</th>
@@ -734,7 +734,7 @@
           <h1 class="page-title">机会发现</h1>
           <p class="page-sub">基于确定性行情规则筛选自选与美股观察池，不做黑盒模型扫描；数据不可用时如实返回空集。</p>
         </div>
-        <span class="badge info">已接入: Yahoo Finance (8 只美股观察池)</span>
+        <span class="badge info">已接入: 模拟快照 (8 只美股观察池)</span>
       </div>
 
       <div class="grid-today-hero">
@@ -754,7 +754,7 @@
                   </div>
                   <div class="tiny muted mono" style="margin-top:3px;">规则: ${esc(t.rule)}</div>
                 </div>
-                <span class="badge ${t.requires === 'yahoo' ? 'pos' : 'warn'}">${t.requires === 'yahoo' ? 'Yahoo 可用' : '需 Longbridge'}</span>
+                <span class="badge ${t.requires === 'yahoo' ? 'pos' : 'warn'}">${t.requires === 'yahoo' ? '快照可用' : '需 Longbridge'}</span>
               </button>`
               )
               .join('')}
@@ -773,7 +773,7 @@
             activeTask.requires !== 'yahoo'
               ? `<div style="padding:22px 14px;text-align:center;background:var(--surface-muted);border-radius:var(--radius-sm);">
                    <div style="font-weight:650;margin-bottom:6px;">当前连接无法执行该基本面/事件规则 (0 候选)</div>
-                   <div class="small muted">原因：<code>Longbridge CLI is not installed</code>。Yahoo Finance 仅提供美股价格与日/周 K 线，不包含 TTM 市盈率或 EPS Surprise。</div>
+                   <div class="small muted">原因：<code>Longbridge CLI is not installed</code>。模拟行情源仅提供美股价格与日/周 K 线，不包含 TTM 市盈率或 EPS Surprise。</div>
                  </div>`
               : hits.length === 0
                 ? `<div style="padding:22px 14px;text-align:center;background:var(--surface-muted);border-radius:var(--radius-sm);">
@@ -827,8 +827,8 @@
             <button class="btn accent" data-run-scenario="honest-data-gap"><span>在 Copilot 查看缺口说明</span>${icon('arrowRight', 14)}</button>
           </div>
           <div style="margin-top:16px;padding:18px;border-radius:var(--radius-sm);background:var(--surface-muted);border:1px dashed var(--border-strong);">
-            <div style="font-weight:650;margin-bottom:6px;">Yahoo Finance 适配器不支持港股/A股行情 (UNSUPPORTED_CAPABILITY)</div>
-            <div class="small muted">明澈 中的 Yahoo Finance 通道仅提供美股（<code>.US</code>）延迟报价与日/周 K 线。要查看 <code>0700.HK</code> 的实时报价、盘口与财报，请在本机安装并登录 <code>longbridge auth login</code>。在未连接数据源时，明澈 严格保持 <code>—</code> 状态，绝不回退虚构价格。</div>
+            <div style="font-weight:650;margin-bottom:6px;">模拟行情源不支持港股/A股行情 (UNSUPPORTED_CAPABILITY)</div>
+            <div class="small muted">明澈 中的模拟行情通道仅提供美股（<code>.US</code>）延迟报价与日/周 K 线。要查看 <code>0700.HK</code> 的实时报价、盘口与财报，请在本机安装并登录 <code>longbridge auth login</code>。在未连接数据源时，明澈 严格保持 <code>—</code> 状态，绝不回退虚构价格。</div>
             <div style="margin-top:12px;">
               <button class="btn sm primary" data-open-sym="NVDA.US">切回 NVDA.US 美股工作台</button>
             </div>
@@ -855,7 +855,7 @@
                 <input type="checkbox" id="toggle-ema" ${state.showEma ? 'checked' : ''}/> 叠加 EMA(6,12,20)
               </label>
             </div>
-            <span class="tiny subtle mono">Yahoo Finance · ${esc(eqItem.marketTimeUtc)} · Delayed</span>
+            <span class="tiny subtle mono">Limpid Demo Feed · ${esc(eqItem.marketTimeUtc)} · Delayed</span>
           </div>
           <div id="kline-Dynamic-Container">
             ${renderKlineSvg(eqItem, state.klinePeriod, state.showEma, state.klineHoverIdx)}
@@ -883,7 +883,7 @@
           </div>
           <div class="card">
             <div class="card-header">
-              <span class="section-eyebrow">多周期回报与技术结构 (Yahoo)</span>
+              <span class="section-eyebrow">多周期回报与技术结构 (模拟)</span>
               <button class="btn xs accent" data-research-sym="${esc(sym)}"><span>完整研究报告</span>${icon('arrowRight', 12)}</button>
             </div>
             <div class="grid-3 tnum" style="gap:10px;">
@@ -904,7 +904,7 @@
             <span class="section-eyebrow">财务报表与估值倍数 (Financials & Valuation)</span>
             <span class="badge warn">能力不可用 · Longbridge CLI 未安装</span>
           </div>
-          <p class="small muted">明澈 状态契约规定：估值倍数（PE / PB / EV-EBITDA）与三大财务报表依赖 Longbridge 或已配置的付费数据源；在仅启用 Yahoo Finance 免费 chart 接口时明确标为 <code>—</code>，不展示过期或硬编码财报。</p>
+          <p class="small muted">明澈 状态契约规定：估值倍数（PE / PB / EV-EBITDA）与三大财务报表依赖 Longbridge 或已配置的付费数据源；在仅启用内置模拟快照时明确标为 <code>—</code>，不展示过期或硬编码财报。</p>
           <table class="data-table" style="margin-top:10px;">
             <thead><tr><th>指标项</th><th class="right">当前值</th><th class="right">5年均值</th><th>状态说明</th></tr></thead>
             <tbody>
@@ -947,7 +947,7 @@
               <div class="tnum small ${chgClass(eqItem.changePct)}" style="font-weight:650;margin-top:2px;">
                 ${eqItem.change >= 0 ? '+' : ''}${eqItem.change.toFixed(2)} (${fmtPct(eqItem.changePct)})
               </div>
-              <div class="tiny subtle" style="margin-top:2px;">Yahoo Finance · ${esc(eqItem.marketTimeUtc)} · Delayed</div>
+              <div class="tiny subtle" style="margin-top:2px;">Limpid Demo Feed · ${esc(eqItem.marketTimeUtc)} · Delayed</div>
             </div>
             <button class="btn accent" data-research-sym="${esc(eqItem.symbol)}">${icon('search', 14)}<span>深度研究</span></button>
           </div>
@@ -984,7 +984,7 @@
             <h1 class="page-title">投资组合</h1>
             <span class="badge warn">${icon('flask', 12)}<span>示例数据</span></span>
           </div>
-          <p class="page-sub">未接入券商账户时使用示例持仓账本，市值、盈亏、配置权重、HHI 指数与回撤实时按 Yahoo Finance 报价计算。</p>
+          <p class="page-sub">未接入券商账户时使用示例持仓账本，市值、盈亏、配置权重、HHI 指数与回撤实时按 模拟行情报价计算。</p>
         </div>
         <div style="display:flex;gap:8px;">
           <button class="btn" id="btn-open-import">${icon('plus', 14)}<span>导入 / 新增持仓</span></button>
@@ -1105,7 +1105,7 @@
     const availableToAdd = allSyms.filter((s) => !syms.includes(s));
 
     const metricRows = [
-      { label: '最新价格 (Yahoo)', fn: (q) => `<strong>${fmtUsd(q.price)}</strong>` },
+      { label: '最新价格 (模拟)', fn: (q) => `<strong>${fmtUsd(q.price)}</strong>` },
       { label: '单日涨跌幅', fn: (q) => `<span class="${chgClass(q.changePct)}">${fmtPct(q.changePct)}</span>` },
       { label: '近 5 日回报', fn: (q) => `<span class="${chgClass(q.ret5d)}">${fmtPct(q.ret5d)}</span>` },
       { label: '1 个月回报', fn: (q) => `<strong class="${chgClass(q.ret1m)}">${fmtPct(q.ret1m)}</strong>` },
@@ -1222,19 +1222,19 @@
             <tr>
               <td class="mono">market.quote</td>
               <td>最新价 ${fmtUsd(eqItem.price)} (${fmtPct(eqItem.changePct)})，区间 $${eqItem.low}–$${eqItem.high}，量比 ${eqItem.volumeRatio}x</td>
-              <td class="tiny muted">Yahoo Finance · ${esc(eqItem.marketTimeUtc)} (Delayed)</td>
+              <td class="tiny muted">Limpid Demo Feed · ${esc(eqItem.marketTimeUtc)} (Delayed)</td>
               <td class="right"><span class="badge pos">${icon('check', 11)}<span>成功</span></span></td>
             </tr>
             <tr>
               <td class="mono">market.kline</td>
               <td>已审阅 65 根日线与 52 根周线：SMA20 $${eqItem.sma20} / SMA50 $${eqItem.sma50} / RSI(14) ${eqItem.rsi14}</td>
-              <td class="tiny muted">Yahoo Finance · 1D & 1W OHLCV</td>
+              <td class="tiny muted">Limpid Demo Feed · 1D & 1W OHLCV</td>
               <td class="right"><span class="badge pos">${icon('check', 11)}<span>成功</span></span></td>
             </tr>
             <tr>
               <td class="mono">company.profile</td>
               <td>${esc(eqItem.name)} · ${esc(eqItem.exchange)} (${esc(eqItem.currency)})</td>
-              <td class="tiny muted">Yahoo Finance · Meta</td>
+              <td class="tiny muted">Limpid Demo Feed · Meta</td>
               <td class="right"><span class="badge pos">${icon('check', 11)}<span>成功</span></span></td>
             </tr>
             <tr>
@@ -1410,7 +1410,7 @@
         <div>
           <span class="section-eyebrow">Deterministic Monitoring · 价格与敞口提醒</span>
           <h1 class="page-title">提醒规则 (${evaluated.length})</h1>
-          <p class="page-sub">基于当前 Yahoo Finance 报价与组合权重自动判定触发状态，当前共 <strong>${trigCount}</strong> 条规则已触发。</p>
+          <p class="page-sub">基于当前模拟行情报价与组合权重自动判定触发状态，当前共 <strong>${trigCount}</strong> 条规则已触发。</p>
            <span class="badge warn">${icon('flask', 12)}<span>示例规则</span></span>
         </div>
         <button class="btn primary" id="btn-add-alert">${icon('plus', 14)}<span>新建价格提醒</span></button>
@@ -1498,8 +1498,8 @@
     const active = state.skills.find((s) => s.id === state.selectedSkillId) || state.skills[0];
     const badgeOf = (r, en) => {
       if (!en) return '<span class="badge">已禁用</span>';
-      if (r === 'ready') return `<span class="badge pos">${icon('check', 11)}<span>完全就绪 (Yahoo)</span></span>`;
-      if (r === 'partial') return '<span class="badge info">部分就绪 (Yahoo 覆盖核心)</span>';
+      if (r === 'ready') return `<span class="badge pos">${icon('check', 11)}<span>完全就绪 (快照)</span></span>`;
+      if (r === 'partial') return '<span class="badge info">部分就绪 (快照覆盖核心)</span>';
       return `<span class="badge warn">${icon('alert', 11)}<span>缺少 Longbridge 能力</span></span>`;
     };
 
@@ -1632,16 +1632,16 @@
           <div class="section-eyebrow" style="margin-bottom:10px;">安全与产品不变式核查</div>
           <div style="display:flex;flex-direction:column;gap:8px;" class="small">
             <div style="display:flex;justify-content:space-between;"><span>交易与下单能力数</span><span class="badge pos mono">0 (纯只读工作台)</span></div>
-            <div style="display:flex;justify-content:space-between;"><span>美股行情与 K 线连接器</span><span class="badge info">Yahoo Finance · Delayed</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>美股行情与 K 线连接器</span><span class="badge info">Limpid Demo Feed · 模拟快照</span></div>
             <div style="display:flex;justify-content:space-between;"><span>本地演示状态持久化</span><span class="mono tiny">localStorage (${esc(state.yahooSourceMode)})</span></div>
             <div style="display:flex;justify-content:space-between;"><span>缺失数据回退策略</span><span class="mono tiny">严格显示「—」并声明缺口</span></div>
           </div>
         </div>
         <div class="card">
           <div class="section-eyebrow" style="margin-bottom:10px;">数据源状态摘要</div>
-          <p class="small muted">最近一次 Yahoo Finance 数据同步时间：<code class="tnum">${esc(state.yahooLastSync)}</code></p>
+          <p class="small muted">最近一次 模拟行情数据时间：<code class="tnum">${esc(state.yahooLastSync)}</code></p>
           <div style="display:flex;gap:8px;margin-top:12px;">
-            <button class="btn sm accent" data-action="refresh-yahoo">${icon('refresh', 13)}<span>刷新 Yahoo 行情</span></button>
+            <button class="btn sm accent" data-action="refresh-yahoo">${icon('refresh', 13)}<span>刷新模拟行情</span></button>
             <button class="btn sm" data-nav="/settings"><span>前往连接与模型设置</span>${icon('arrowRight', 13)}</button>
           </div>
         </div>
@@ -1664,13 +1664,16 @@
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="padding:11px 13px;border:1px solid var(--border);border-radius:var(--radius-sm);">
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <strong>Yahoo Finance (v8 Chart)</strong>
-                <span class="badge pos">${icon('check', 11)}<span>已连接 · 主用美股源</span></span>
+                <strong>Limpid Demo Feed（内置模拟数据）</strong>
+                <span class="badge pos">${icon('check', 11)}<span>已启用 · 演示数据源</span></span>
               </div>
-              <div class="tiny muted" style="margin-top:4px;">免密钥提供美股延迟报价、日/周 K 线与公司简称。仅供个人研究使用。</div>
+              <div class="tiny muted" style="margin-top:4px;">固定随机种子生成的模拟价格与日/周 K 线，覆盖 8 只美股观察池。用于演示分析流程，不代表任何真实标的报价。</div>
+              <div class="tiny subtle" style="margin-top:6px;display:flex;gap:10px;flex-wrap:wrap;">
+                <span>可复现：同一种子输出一致</span><span>可离线：不发起网络请求</span><span>仅演示：非投资建议</span>
+              </div>
               <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
-                <span class="tiny subtle mono">状态: ${state.yahooSourceMode === 'live' ? '已刷新最新延迟行情' : '已加载延迟行情快照'}</span>
-                <button class="btn xs accent" data-action="refresh-yahoo">${icon('refresh', 12)}<span>测试连接</span></button>
+                <span class="tiny subtle mono">状态: ${state.yahooSourceMode === 'live' ? '已重新载入模拟快照' : '已加载内置模拟快照'}</span>
+                <button class="btn xs accent" data-action="refresh-yahoo">${icon('refresh', 12)}<span>重新载入快照</span></button>
               </div>
             </div>
 
