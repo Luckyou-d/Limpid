@@ -15,7 +15,7 @@
   <a href="#product-preview">Preview</a> ·
   <a href="#core-features">Features</a> ·
   <a href="#quick-start">Quick start</a> ·
-  <a href="#data-sources-and-boundaries">Data sources</a> ·
+  <a href="#data-notes">Data notes</a> ·
   <a href="CHANGELOG.md">Changelog</a>
 </p>
 
@@ -166,33 +166,13 @@ Set your own domain in `routes` inside `wrangler.jsonc`. Alternatively, connect 
 | `.github/workflows/` | PR checks and release workflow |
 | `wrangler.jsonc`, `vercel.json` | Deployment config for Cloudflare Workers and Vercel |
 
-## Data sources and boundaries
+## Data notes
 
-Limpid is an **offline demo workbench**: it connects to no live market feed and calls no external model. Prices, candles and research reports are produced by a fixed-seed generator, so the same code yields identical results on any machine. See [data-sources.md](docs/data-sources.md) for the full matrix.
-
-| Source | Status | Coverage |
-|---|---|---|
-| Limpid Demo Feed | Enabled | Synthetic prices, daily/weekly candles and company names for 8 US symbols |
-| Longbridge OpenAPI / CLI | Not installed | HK/CN depth, three statements, filings, broker positions |
-| Massive | Not configured | US fallback source |
-| Model runtime | Preset content | Copilot replies and research conclusions are scenario-based preset text |
-
-**When data is missing**:
-
-- Unavailable capabilities state the reason, for example "Longbridge CLI not installed". Nothing is left blank or invented.
-- Financial and valuation fields show `—` instead of estimates or stale values.
-- Pages make no outbound requests on load; "Reload snapshot" only re-reads the built-in data.
-- Portfolio, events, research and alerts carry an "sample data" badge, and samples never pretend to be a connected account.
-
-**Regenerate the demo data**:
-
-```bash
-node scripts/generate-demo-data.mjs   # fixed seed: deterministic market data and narrative
-node scripts/smoke.mjs                # checks syntax, data shapes, and text/snapshot agreement
-```
-
-Every indicator (SMA, EMA, RSI, drawdown, period returns) is computed from the same price series, so charts, tables and prose always agree.
-
+- Market data and charts are a built-in snapshot based on delayed Yahoo Finance data. They are not refreshed in real time.
+- Portfolio, events and research reports are sample data for demonstrating the interface and analysis workflow. They are not investment advice.
+- Copilot replies come from scenario-based preset content. No external language model is called.
+- The project has no trading integration and cannot place orders or move funds.
+- Financial and valuation fields depend on the Longbridge CLI or a paid data source. Until one is connected, they show `—` with an explanation.
 ## Changelog and contributing
 
 - Release history: [CHANGELOG.md](CHANGELOG.md)

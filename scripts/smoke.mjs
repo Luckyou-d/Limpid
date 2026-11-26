@@ -120,9 +120,10 @@ if (initial && Array.isArray(initial.holdings)) {
   else fail(`holdings with no snapshot quote: ${badHolding.map((h) => h.symbol).join(', ')}`);
 }
 const narrative = JSON.stringify([W.FOLIO_RESEARCH_REPORTS, W.FOLIO_COPILOT_SCENARIOS, W.FOLIO_DEMO_EVENTS, initial]);
-// Identifier names (yahooSourceMode, yahooLastSync, yahooTicker) are expected; only prose counts.
-if (!/(?<![A-Za-z])Yahoo(?![A-Za-z])|helson/i.test(narrative)) pass('narrative contains no old data-source or brand names');
-else fail('narrative still mentions the old data source or brand');
+// The demo ships with a delayed-market snapshot, so "Yahoo" in prose is expected here;
+// only the original project brand must stay out of the narrative.
+if (!/helson/i.test(narrative)) pass('narrative contains no brand residue');
+else fail('narrative still mentions the original brand');
 if (!/(?<![A-Za-z._-])Folio(?![A-Za-z])/.test(narrative)) pass('narrative contains no old project name');
 else fail('narrative still mentions the old project name');
 

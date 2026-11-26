@@ -40,7 +40,7 @@
     'arch-router': {
       badge: '多源路由与溯源',
       title: 'ProviderRouter：主备数据源透明降级与真实 Provenance',
-      body: '按主备顺序路由 Longbridge / Massive / 内置模拟快照的行情与财报能力：主源失败切换备源并强制保留真实备源 Provenance；遇到用户取消（ABORTED）立即终止，绝不触发无效备源降级。',
+      body: '按主备顺序路由 Longbridge / Massive / Yahoo 行情与财报能力：主源失败切换备源并强制保留真实备源 Provenance；遇到用户取消（ABORTED）立即终止，绝不触发无效备源降级。',
     },
     'arch-eval': {
       badge: '只读投影与评测门禁',
@@ -131,7 +131,7 @@
     'Pi Agent Runtime (JSONL)',
     'wrapToolsWithPrivacy',
     'Capability Registry',
-    'ProviderRouter (Longbridge / 模拟快照)',
+    'ProviderRouter (Longbridge / Yahoo)',
     'SkillHub V2',
     'projectTrace + Eval Gate',
   ];
@@ -441,7 +441,7 @@
         '<g class="archm-node" data-node="arch-router">' +
           '<rect class="node-box" x="596" y="325" width="256" height="60" rx="10" fill="var(--am-node-fill)" stroke="var(--am-ok)" stroke-width="1.3"/>' +
           '<text x="610" y="345" font-size="12.5" font-weight="700" fill="var(--am-text)">ProviderRouter 主备路由</text>' +
-          '<text x="610" y="363" font-size="10.8" fill="var(--am-muted)">Longbridge 主源 → Massive / 内置模拟快照</text>' +
+          '<text x="610" y="363" font-size="10.8" fill="var(--am-muted)">Longbridge 主源 → Massive / Yahoo 备源</text>' +
           '<text x="610" y="377" font-size="10.2" font-weight="600" fill="var(--am-ok)">保留真实 Provenance · ABORT 不降级</text>' +
         '</g>' +
 
@@ -760,7 +760,7 @@
           '<div class="archm-body">' + bodyHtml + '</div>' +
 
           '<footer class="archm-foot">' +
-            '<div class="archm-foot-note">展示完整桌面端设计架构 · 当前演示站使用内置模拟快照与只读示例持仓 · 由 Harveydu 搭建</div>' +
+            '<div class="archm-foot-note">展示完整桌面端设计架构 · 当前演示站接入 Yahoo 延迟行情与只读示例持仓 · 由 Harveydu 搭建</div>' +
             '<div class="archm-foot-actions">' +
               '<button class="archm-btn primary" id="archm-enter" type="button">进入投研演示</button>' +
             '</div>' +

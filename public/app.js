@@ -2,8 +2,6 @@
 
 (function () {
   const STORAGE_KEY = 'limpidwork_demo_state_v1';
-  // Static site: market data is the built-in snapshot; no live requests are made from the browser.
-  const SNAPSHOT_ONLY = true;
   const V = window.FolioViews;
 
   let market = JSON.parse(JSON.stringify(window.FOLIO_MARKET_SNAPSHOT));
@@ -87,7 +85,7 @@
       { title: '设置与连接 (Connections & Runtime)', sub: '系统设置', type: 'nav', val: '/settings' },
       ...Object.values(market.equities).map((q) => ({
         title: `${q.symbol} · ${q.name}`,
-        sub: `模拟行情报价 ${V.fmtUsd(q.price)} (${V.fmtPct(q.changePct)})`,
+        sub: `Yahoo 延迟报价 ${V.fmtUsd(q.price)} (${V.fmtPct(q.changePct)})`,
         type: 'sym',
         val: q.symbol,
       })),
@@ -144,13 +142,9 @@
   }
 
   async function refreshYahooData() {
-    if (SNAPSHOT_ONLY) {
-      toast('静态演示站使用内置行情快照，不发起实时请求');
-      return;
-    }
     if (refreshingYahoo) return;
     refreshingYahoo = true;
-    toast('正在重新载入内置模拟快照...');
+    toast('正在请求 Yahoo Finance 同步延迟行情...');
     render();
     let updatedCount = 0;
     try {
@@ -193,10 +187,10 @@
       state.yahooLastSync = new Date().toISOString();
       saveState();
       render();
-      toast(`已同步模拟行情 ${updatedCount} 只美股最新延迟行情`);
+      toast(`已从 Yahoo Finance 同步 ${updatedCount} 只美股最新延迟行情`);
     } else {
       render();
-      toast('当前为纯静态环境，已加载内置 Limpid Demo Feed 行情快照');
+      toast('当前为纯静态环境，已加载内置 Yahoo Finance 行情快照');
     }
   }
 
@@ -248,14 +242,14 @@
 
     const fallbackMd = activeEq
       ? `### 基于当前工作区上下文的只读核验 (${state.activeSymbol})\n\n` +
-        `- **行情快照 (Limpid Demo Feed · 模拟快照)**：最新收盘价 **$${activeEq.price.toFixed(2)}**（单日 **${V.fmtPct(activeEq.changePct)}**，近 1 个月 **${V.fmtPct(activeEq.ret1m)}**），SMA20 **$${activeEq.sma20}** / SMA50 **$${activeEq.sma50}**，RSI(14) **${activeEq.rsi14}**。\n` +
+        `- **行情快照 (Yahoo Finance · Delayed)**：最新收盘价 **$${activeEq.price.toFixed(2)}**（单日 **${V.fmtPct(activeEq.changePct)}**，近 1 个月 **${V.fmtPct(activeEq.ret1m)}**），SMA20 **$${activeEq.sma20}** / SMA50 **$${activeEq.sma50}**，RSI(14) **${activeEq.rsi14}**。\n` +
         `- **组合敞口联动 (示例持仓)**：${
           pos
             ? `当前持有 **${pos.qty} 股**（成本 $${pos.avgCost.toFixed(2)}），占组合权重 **${pos.weightPct.toFixed(2)}%**，未实现浮盈亏 **${V.fmtSignedUsd(pos.pnl)} (${V.fmtPct(pos.pnlPct)})**。`
             : `当前演示组合（总资产 **${V.fmtUsd(portfolio.totalAssets)}**）未持有该标的。`
         }\n` +
-        `- **能力边界提示**：当前演示工作台仅接入 模拟行情美股日/周线，未安装 Longbridge CLI（无实时 PE/财报流），可点击上方预设场景查看完整分析。`
-      : `### 数据源边界说明 (${state.activeSymbol})\n\n当前 Limpid Demo Feed 适配器仅覆盖美股延迟行情，无法获取 \`${state.activeSymbol}\` 的实时报价与盘口；明澈 拒绝在缺失数据源时猜测数字。`;
+        `- **能力边界提示**：当前演示工作台仅接入 Yahoo Finance 美股日/周线，未安装 Longbridge CLI（无实时 PE/财报流），可点击上方预设场景查看完整分析。`
+      : `### 数据源边界说明 (${state.activeSymbol})\n\n当前 Yahoo Finance 适配器仅覆盖美股延迟行情，无法获取 \`${state.activeSymbol}\` 的实时报价与盘口；明澈 拒绝在缺失数据源时猜测数字。`;
 
     state.copilotTurns.push({
       id: 'turn-' + Date.now(),
@@ -267,7 +261,7 @@
       content: fallbackMd,
       tools: [
         { name: 'get_workspace_context', target: `${getRoute()} · ${state.activeSymbol}`, status: 'ok', ms: 3, source: 'Workspace State' },
-        { name: 'get_quote', target: state.activeSymbol, status: activeEq ? 'ok' : 'error', ms: 11, source: activeEq ? 'Limpid Demo Feed · 模拟快照' : 'UNSUPPORTED' },
+        { name: 'get_quote', target: state.activeSymbol, status: activeEq ? 'ok' : 'error', ms: 11, source: activeEq ? 'Yahoo Finance · Delayed' : 'UNSUPPORTED' },
       ],
     });
     saveState();
@@ -454,7 +448,7 @@
 
           <div class="watchlist-section">
             <div class="watchlist-header">
-              <span>自选 (模拟)</span>
+              <span>自选 (Yahoo)</span>
               <span class="tnum">${state.watchlist.length}</span>
             </div>
             ${state.watchlist
@@ -497,8 +491,8 @@
               <button class="btn sm" id="btn-open-arch" type="button" title="查看设计架构与核心状态机">
                 ${V.icon('fileText', 13)}<span>架构介绍</span>
               </button>
-              <button class="btn sm" data-action="refresh-yahoo" title="同步模拟行情">
-                ${V.icon('refresh', 13)}<span>${refreshingYahoo ? '同步中...' : '模拟行情'}</span>
+              <button class="btn sm" data-action="refresh-yahoo" title="同步 Yahoo Finance 行情">
+                ${V.icon('refresh', 13)}<span>${refreshingYahoo ? '同步中...' : 'Yahoo 行情'}</span>
               </button>
               <a class="btn sm" href="mobile.html#${V.esc(route)}">${V.icon('smartphone', 13)}<span>手机端</span></a>
               <button class="btn sm" id="btn-cmdk">${V.icon('search', 13)}<span>搜索</span></button>
@@ -514,7 +508,7 @@
           <div class="demobar">
             <div class="demobar-left">
               ${V.icon('shield', 13)}
-              <span>静态演示模式 · 本地优先的 AI 投资研究工作台（只读） · 美股报价与 K 线来自 <strong>Limpid Demo Feed (模拟快照)</strong>，投资组合与事件日历为示例数据</span>
+              <span>静态演示模式 · 本地优先的 AI 投资研究工作台（只读） · 美股报价与 K 线来自 <strong>Yahoo Finance (Delayed)</strong>，投资组合与事件日历为示例数据</span>
             </div>
             <span class="tiny mono subtle" style="white-space:nowrap;">当前标的: ${V.esc(state.activeSymbol)}</span>
           </div>
@@ -677,7 +671,7 @@
 
     document.querySelectorAll('[data-kperiod-blocked]').forEach((el) => {
       el.onclick = () => {
-        toast(`模拟快照仅提供日线 (1D) 与周线 (1W)，${el.dataset.kperiodBlocked} 周期需连接 Longbridge CLI`);
+        toast(`Yahoo Finance 仅提供日线 (1D) 与周线 (1W)，${el.dataset.kperiodBlocked} 周期需连接 Longbridge CLI`);
       };
     });
 
