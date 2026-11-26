@@ -3,10 +3,16 @@
 All notable changes to this project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.1.0-beta.2] - 2026-11-23
 
-### Fixed
-- Top-bar tabs no longer wrap onto two lines on narrower desktops, and the top actions stay visible beside the copilot panel.
+Documentation and preview release. The demo data is unchanged from 0.1.0-beta.1.
+
+### Added
+- Eighteen screenshots covering all desktop pages (Today, Discover, Workbench tabs, Portfolio, Compare, Alerts, Research, Thesis, Skills, Evaluation, Events, Profile) plus four mobile views.
+- Smoke checks now verify that every image referenced by the README exists, and that research reports quote prices and indicators matching the market snapshot.
+
+### Changed
+- README: the core features section is expanded into fourteen detailed subsections; the separate tech-stack section was removed.
 
 ## [0.1.0-beta.1] - 2026-11-23
 
